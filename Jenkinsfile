@@ -12,7 +12,7 @@ pipeline {
         GIT_BRANCH = 'master'
         CREDENTIALS_GITHUB = 'github-isaacdanielreyna'
         CREDENTIALS_DOCKER = 'docker-isaacdanielreyna'
-        GIT_URL = 'https://github.com/IsaacDanielReyna/react-sandbox.git'
+        GIT_URL = 'https://github.com/demo-isaacreyna-com/django.git'
         IMAGE = 'isaacdanielreyna/django'
         TAG = '0.1.0'
         CONTAINER_NAME = 'django'
