@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-p+^@rtu&=&a)w$u@baljo*2i#+=9)jnj9c@fpmyvbv@2p)crz-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ 'demo.isaacreyna.com' ]
+ALLOWED_HOSTS = [
+    'localhost',
+    'demo.isaacreyna.com'
+]
 
 
 
@@ -38,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'users'
 ]
 
@@ -77,8 +81,12 @@ WSGI_APPLICATION = 'demo.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': 'localhost',
+        'PORT': '5432',
+        'NAME': 'demo',
+        'USER': 'admin_sa',
+        'PASSWORD': 'admin8520',
     }
 }
 

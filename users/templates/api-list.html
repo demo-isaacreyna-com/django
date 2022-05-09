@@ -2,6 +2,14 @@
 <ul>
     <li><a href="/list/">list/</a></li>
     <li><a href="/register/">register/</a></li>
-    <li><a href="/profile/">profile/</a></li>
-    <li><a href="/list/">update/</a></li>
+    <li><a href="/profile/jsmith">profile/jsmith</a></li>
+    <li><a href="/delete/jsmith">delete/jsmith</a></li>
 </ul>
+
+<form method="post" action="/register/">
+    <input type="text" name="username" value="jsmith"/><br/>
+    <input type="password" name="password" value="abc123"/><br/>
+    <input type="text" name="first_name" value="John"/><br/>
+    <input type="text" name="last_name" value="Smith"/><br/>
+    <button type="submit">Create User</button>
+</form>
