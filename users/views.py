@@ -23,7 +23,7 @@ def register(request):
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response('ok')
+        return Response(status=status.HTTP_200_OK)
 
 @api_view()
 def profile(request, username):

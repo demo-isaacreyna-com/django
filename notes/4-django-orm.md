@@ -91,6 +91,8 @@ def say_hello(request):
 
     return render(request, 'hello.html', { 'productExists': exists })
 ```
+---
+## Filtering Objects
 
 Find all products that are greater than $20.
 ```python
