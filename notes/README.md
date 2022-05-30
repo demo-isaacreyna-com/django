@@ -16,3 +16,6 @@
 1. Run the server: `python manage.py runserver 8000`
 1. Each time our models are changed run: `python manage.py makemigrations`
 1. Run the migration against the database: python manage.py migrate`
+
+## TODOs 
+1. Update dockerfile to use Pipfile instead of requirements.txt
