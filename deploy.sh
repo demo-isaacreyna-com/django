@@ -20,8 +20,9 @@ deployWithDockerRun() {
     local outputStop=$(docker stop "${vars['CONTAINER_NAME']}")
     local outputRemove=$(docker rm "${vars['CONTAINER_NAME']}")
     local outputDockerImageRemove=$(docker image rm "${vars['IMAGE']}":"${vars['TAG']}")
+    docker network create --driver bridge demo_network || true
     docker run -d \
-        --network=demo \
+        --network=demo_network \
         --env "POSTGRES_HOST=postgres" \
         --env "POSTGRES_USER=${vars['POSTGRES_USER']}" \
         --env "POSTGRES_PASSWORD=${vars['POSTGRES_PASSWORD']}" \
