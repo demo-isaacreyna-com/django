@@ -21,13 +21,13 @@ deployWithDockerRun() {
     local outputRemove=$(docker rm "${vars['CONTAINER_NAME']}")
     local outputDockerImageRemove=$(docker image rm "${vars['IMAGE']}":"${vars['TAG']}")
     docker run -d \
+        --env "POSTGRES_HOST=postgres" \
+        --env "POSTGRES_USER=${vars['POSTGRES_USER']}" \
+        --env "POSTGRES_PASSWORD=${vars['POSTGRES_PASSWORD']}" \
+        --env "POSTGRES_DB=demo" \
         --name "${vars['CONTAINER_NAME']}" \
         -p "${vars['EXTERNAL_PORT']}":"${vars['INTERNAL_PORT']}" \
-        -t "${vars['IMAGE']}":"${vars['TAG']}" \
-        -env "POSTGRES_HOST=postgres" \
-        -env "POSTGRES_USER=${vars['POSTGRES_USER']}" \
-        -env "POSTGRES_PASSWORD=${vars['POSTGRES_PASSWORD']}" \
-        -env "POSTGRES_DB=demo"
+        -t "${vars['IMAGE']}":"${vars['TAG']}"
 }
 
 validate() {
