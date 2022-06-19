@@ -21,7 +21,7 @@ pipeline {
     }
 
     parameters {
-        booleanParam(name: 'DEPLOY', defaultValue: true, description: 'Deploys the container')
+        booleanParam(name: 'DEPLOY', defaultValue: false, description: 'Deploys the container')
     }
 
     stages {
