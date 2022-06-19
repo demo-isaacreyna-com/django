@@ -3,9 +3,9 @@ from . import views
 
 # URLConf
 urlpatterns = [
-    path('', views.default),
-    path('list/', views.list),
-    path('register/', views.register),
-    path('profile/<username>/', views.profile),
-    path('delete/<username>', views.delete),
+    path('api/', views.default),
+    path('api/list/', views.list),
+    path('api/register/', views.register),
+    path('api/profile/<username>/', views.profile),
+    path('api/delete/<username>', views.delete),
 ]
