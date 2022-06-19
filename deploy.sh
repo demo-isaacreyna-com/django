@@ -8,6 +8,8 @@ main() {
         ['CONTAINER_NAME']="${3}"
         ['EXTERNAL_PORT']="${4}"
         ['INTERNAL_PORT']="${5}"
+        ['POSTGRES_USER']="${6}"
+        ['POSTGRES_PASSWORD']="${7}"
     )
 
     validate
@@ -18,7 +20,14 @@ deployWithDockerRun() {
     local outputStop=$(docker stop "${vars['CONTAINER_NAME']}")
     local outputRemove=$(docker rm "${vars['CONTAINER_NAME']}")
     local outputDockerImageRemove=$(docker image rm "${vars['IMAGE']}":"${vars['TAG']}")
-    docker run -d --name "${vars['CONTAINER_NAME']}" -p "${vars['EXTERNAL_PORT']}":"${vars['INTERNAL_PORT']}" -t "${vars['IMAGE']}":"${vars['TAG']}"
+    docker run -d \
+        --name "${vars['CONTAINER_NAME']}" \
+        -p "${vars['EXTERNAL_PORT']}":"${vars['INTERNAL_PORT']}" \
+        -t "${vars['IMAGE']}":"${vars['TAG']}" \
+        -e "POSTGRES_HOST=postgres" \
+        -e "POSTGRES_USER=${POSTGRES_USER}" \
+        -e "POSTGRES_PASSWORD=${POSTGRES_PASSWORD}" \
+        -e "POSTGRES_DB=demo"
 }
 
 validate() {
@@ -52,4 +61,4 @@ deployWithDockerCompose() {
     docker-compose up -d
 }
 
-main $@
+main "$@"

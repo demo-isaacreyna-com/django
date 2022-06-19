@@ -60,16 +60,17 @@ pipeline {
             }
         }
 
-        // stage('Deploy Container') {
-        //     steps {
-        //         sh './deploy.sh ${IMAGE} ${TAG} ${CONTAINER_NAME} ${EXTERNAL_PORT} ${INTERNAL_PORT}'
-        //     }
-        // }
+        stage('Deploy Container') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'demo-postgres-credentials', usernameVariable: 'POSTGRES_USER', passwordVariable: 'POSTGRES_PASSWORD')]) {
+                    sh './deploy.sh ${IMAGE} ${TAG} ${CONTAINER_NAME} ${EXTERNAL_PORT} ${INTERNAL_PORT} ${POSTGRES_USER} ${POSTGRES_PASSWORD}'
+                }
+            }
+        }
     }
 
     post {
         always {
-            // Logout from docker
             sh 'docker logout'
 
             echo 'Delete the following files'
