@@ -24,10 +24,10 @@ deployWithDockerRun() {
         --name "${vars['CONTAINER_NAME']}" \
         -p "${vars['EXTERNAL_PORT']}":"${vars['INTERNAL_PORT']}" \
         -t "${vars['IMAGE']}":"${vars['TAG']}" \
-        -e "POSTGRES_HOST=postgres" \
-        -e "POSTGRES_USER=${vars['POSTGRES_USER']}" \
-        -e "POSTGRES_PASSWORD=${vars['POSTGRES_PASSWORD']}" \
-        -e "POSTGRES_DB=demo"
+        -env "POSTGRES_HOST=postgres" \
+        -env "POSTGRES_USER=${vars['POSTGRES_USER']}" \
+        -env "POSTGRES_PASSWORD=${vars['POSTGRES_PASSWORD']}" \
+        -env "POSTGRES_DB=demo"
 }
 
 validate() {
