@@ -21,6 +21,7 @@ deployWithDockerRun() {
     local outputRemove=$(docker rm "${vars['CONTAINER_NAME']}")
     local outputDockerImageRemove=$(docker image rm "${vars['IMAGE']}":"${vars['TAG']}")
     docker run -d \
+        --network=demo \
         --env "POSTGRES_HOST=postgres" \
         --env "POSTGRES_USER=${vars['POSTGRES_USER']}" \
         --env "POSTGRES_PASSWORD=${vars['POSTGRES_PASSWORD']}" \
