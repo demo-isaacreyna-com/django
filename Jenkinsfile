@@ -21,6 +21,7 @@ pipeline {
     }
 
     parameters {
+        booleanParam(name: 'BUILD', defaultValue: true, description: 'Builds the image')
         booleanParam(name: 'DEPLOY', defaultValue: false, description: 'Deploys the container')
     }
 
@@ -50,12 +51,14 @@ pipeline {
         }
 
         stage('Build Image') {
+            when { expression { return params.BUILD }}
             steps {
                 sh "docker build -t ${IMAGE}:${TAG} ."
             }
         }
 
         stage('Push Image') {
+            when { expression { return params.BUILD }}
             steps {
                 withCredentials([usernamePassword(credentialsId: "${CREDENTIALS_DOCKER}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh 'echo $PASSWORD | docker login -u $USERNAME --password-stdin'
