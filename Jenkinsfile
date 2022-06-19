@@ -20,6 +20,10 @@ pipeline {
         INTERNAL_PORT = '8000'
     }
 
+    parameters {
+        booleanParam(name: 'DEPLOY', defaultValue: true, description: 'Deploys the container')
+    }
+
     stages {
         stage('Reset Workspace') {
             steps {
@@ -61,6 +65,7 @@ pipeline {
         }
 
         stage('Deploy Container') {
+            when { expression { return params.DEPLOY }}
             steps {
                 withCredentials([usernamePassword(credentialsId: 'demo-postgres-credentials', usernameVariable: 'POSTGRES_USER', passwordVariable: 'POSTGRES_PASSWORD')]) {
                     sh './deploy.sh ${IMAGE} ${TAG} ${CONTAINER_NAME} ${EXTERNAL_PORT} ${INTERNAL_PORT} ${POSTGRES_USER} ${POSTGRES_PASSWORD}'
