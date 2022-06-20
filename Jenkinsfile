@@ -80,7 +80,7 @@ pipeline {
         stage('Run Migrations') {
             when { expression { return params.MIGRATE }}
             steps {
-                sh 'docker exec -it django python manage.py migrate'
+                sh 'docker exec django python manage.py migrate'
             }
         }
     }
