@@ -23,6 +23,7 @@ pipeline {
     parameters {
         booleanParam(name: 'BUILD', defaultValue: true, description: 'Builds the image')
         booleanParam(name: 'DEPLOY', defaultValue: false, description: 'Deploys the container')
+        booleanParam(name: 'MIGRATE', defaultValue: false, description: 'Runs database migrations')
     }
 
     stages {
@@ -73,6 +74,13 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'demo-postgres-credentials', usernameVariable: 'POSTGRES_USER', passwordVariable: 'POSTGRES_PASSWORD')]) {
                     sh './deploy.sh ${IMAGE} ${TAG} ${CONTAINER_NAME} ${EXTERNAL_PORT} ${INTERNAL_PORT} ${POSTGRES_USER} ${POSTGRES_PASSWORD}'
                 }
+            }
+        }
+
+        stage('Run Migrations') {
+            when { expression { return params.MIGRATE }}
+            steps {
+                sh 'docker exec -it django python manage.py migrate'
             }
         }
     }
